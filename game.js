@@ -1,13 +1,26 @@
 
 let DEBUG = false;
 
+let scenes;
+
+let npcs;
+
 function init() {
     main = new Game();
 
+    scenes = {
+        bad: [DevTalkbad1],
+        good: []
+    }
 
+    npcs = {
+        bad: [NPCbad1],
+        good: []
+    }
 }
 
 function Game() {
+    this.goodDialogBoxes = true;
 
     this.walls = [];
     this.actors = [];
@@ -15,9 +28,13 @@ function Game() {
 
     this.player = new Player(this, 200, 120);
 
+    this.currentNPC = false;
+
     this.dialog = false;
 
     this.scene = new intro(this);
+    this.nextScene = false;
+    // this.scene.stage = 9;
 
     this.draw = () => {
 
@@ -41,6 +58,7 @@ function Game() {
 
         if (!this.scene) {
             let g = R.buffer[121];
+            g.hasChanged = true;
             g.background(PAL[0]);
             g.erase();
             g.ellipse(main.player.pos.x + 8, main.player.pos.y - 8, 200, 200);
@@ -50,9 +68,13 @@ function Game() {
     }
 
     let lastRoom = xRoom;
-    this.nextRoom = () => {
+    this.nextRoom = (noNPC) => {
+        if (this.currentNPC && this.currentNPC.finished) this.scene = new this.nextScene(game);
+
         this.walls = [];
         this.actors = [this.player]; // reset actors (accept for player)
+
+        if (random() < 0.15 && !noNPC) new this.currentNPC(this);
 
         let dir = this.player.pos.copy().add(-200, -140);
         let angle = round((degrees(dir.heading()) + 180) / 90) * 90;

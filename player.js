@@ -56,13 +56,12 @@ function Player(game, x, y) {
 
     this.item = false;
     this.checkForItem = () => {
-        if (game.dialog) return;
         if (this.item) {
-            if (btn.a && !pbtn.a) this.dropItem();
+            if (btn.b && !pbtn.b) this.dropItem();
             return;
         }
 
-        if (!(btn.a && !pbtn.a)) return;
+        if (!(btn.b && !pbtn.b)) return;
 
         let threshold = 32;
         let closest = false;

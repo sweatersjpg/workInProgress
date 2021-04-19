@@ -1,16 +1,17 @@
 
-function blankRoom(game) {
+function blankRoom(game, noItems) {
     game.actors = [];
     game.walls = [];
 
-    game.player = new Player(game, 200, 120);
+    game.player = new Player(game, 200 - 8, 140);
 
     new InvertedWall(game, 32, 64, 400 - 64, 240 - 64 - 8);
 
-    new Ball(game, 200, 120);
-    new Pot(game, 210, 110);
+    if (noItems) return;
+    new Ball(game, 260, 160);
+    new Pot(game, 300, 140);
 
-    new CreepyNPC(game, 80, 80);
+    // new CreepyNPC(game, 80, 80);
 
 }
 
@@ -19,7 +20,9 @@ function Item(game, x, y, w, h) {
     this.notSolid = true;
     this.isItem = true;
 
-    this.h = 0;
+    this.vel = new Vector(random(2, 6), 0).rotate(random(TAU));
+
+    this.h = 32;
     this.hb = 0.5;
     this.vh = 0;
 
@@ -111,4 +114,76 @@ function Pot(game, x, y) {
         this.debug();
     }
 
+    this.isGrown = () => {
+        return growth >= 7;
+    }
+
+}
+
+function Button(game, x, y, text, playerOnly) {
+    Actor.call(this, game, x - 15, y - 12, 30, 24);
+
+    this.notSolid = true;
+    this.active = false;
+
+    let timer = 0;
+    let blink = false;
+    this.update = () => {
+        let contact = false;
+        if (playerOnly) contact = collided(this.pos, this.size, game.player.pos, game.player.size);
+        else for (let a of game.actors) {
+            if (a == this || a.visual) continue;
+            if (collided(this.pos, this.size, a.pos, a.size)) {
+                if (a.isItem && a.h > 8) continue;
+                contact = a;
+                break;
+            }
+        }
+
+        this.active = contact;
+
+        if (contact && !timer) {
+            timer = 16;
+        } else if (!contact) timer = 0;
+
+        if (timer > 1) {
+            timer--;
+        } if (timer == 1) {
+            this.activated = contact;
+        }
+
+    }
+
+    this.draw = () => {
+        R.lset(getLayer(this.pos.y));
+
+        R.palset(22, 0);
+        if (timer && timer % 4 >= 2) R.palset(0, 0);
+        let f = 88;
+        if (this.active) f = 120;
+        R.spr(f, this.pos.x - 1, this.pos.y - 2, 2, 2);
+
+        R.put(text, this.pos.x + 15 - text.length * 4, this.pos.y - 12, 22);
+    }
+}
+
+function Choice(game, spacing, ...choices) {
+
+    this.btns = [];
+
+    for (let i = 0; i < choices.length; i++) {
+        let x = i * spacing + 200 - spacing * (choices.length - 1) / 2;
+        this.btns.push(new Button(game, x, 95, choices[i], false));
+    }
+
+    this.answer = () => {
+        let answer = false;
+        for (let b of this.btns) if (b.activated) answer = this.btns.indexOf(b) + 1;
+        return answer;
+    }
+
+    this.kill = () => {
+        for (b of this.btns) b.kill();
+        return false;
+    }
 }

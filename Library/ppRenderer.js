@@ -168,7 +168,9 @@ function ppRenderer(bufferSize) {
         dw += 2 * dw / (sw);
         dh += 2 * dh / (sh);
 
-        let graphics = this.buffer[this.currentLayer];
+        let graphics;
+        if (typeof this.currentLayer === 'number') graphics = this.buffer[this.currentLayer];
+        else graphics = this.currentLayer;
         graphics.hasChanged = true;
         if (this.currentMetaSpr) {
             graphics = this.currentMetaSpr.img;

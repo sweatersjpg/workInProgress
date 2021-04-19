@@ -23,6 +23,7 @@ let btn;
 let pbtn;
 
 let main;
+let paused = false;
 
 let R;
 
@@ -62,17 +63,20 @@ function setup() {
 
 function draw() {
     background(0);
-    R.cls(0);
 
-    mouse.set(floor(mouseX / 3), floor(mouseY / 3));
-
-    main.draw();
-
-    // R.put(btn.up + " " + btn.right + " " + btn.down + " " + btn.left, 0, 0, 22);
+    if (!paused) {
+        R.cls(0);
+        mouse.set(floor(mouseX / 3), floor(mouseY / 3));
+        main.draw();
+    }
 
     R.display();
+    if (paused) paused.display();
 
-
+    if (btn.start && !pbtn.start) {
+        if (paused) paused = false;
+        else paused = new PauseMenu();
+    }
 
     pbtn = btn.copy();
 }
@@ -105,7 +109,7 @@ function TwoPlayerInput() {
     // default controls
     this[0] = {
         c: [[87, 38], [83, 40], [65, 37],
-        [68, 39], [82, 32], 69, false, false, 27, [9, 81]]
+        [68, 39], [82, 32, 13], 69, false, false, 27, [9, 81]]
     }
     this[1] = { c: [] }
 

@@ -1,8 +1,4 @@
 
-let testLines =
-    "Heyo!\nThis is a test of my new dialog system!\n\nPretty neat huh?"
-
-
 function Dialog(game, icon, lines) {
 
     this.currentLine = lines
@@ -20,6 +16,9 @@ function Dialog(game, icon, lines) {
 
     let textSpeed = 0.5;
 
+    let f = icon;
+    if (icon.length) f = random(icon);
+
     this.draw = () => {
         let nLines = (this.text.match(/\n/g) || []).length;
 
@@ -34,6 +33,8 @@ function Dialog(game, icon, lines) {
                     this.t += textSpeed;
                 }
             }
+            if (icon.length && frameCount % 4 == 0) f = random(icon);
+
         } else {
 
             R.lset(124);
@@ -49,17 +50,17 @@ function Dialog(game, icon, lines) {
                 }
             }
         }
-
         R.lset(123);
-        R.palset(0);
-        R.fillRect(this.pos.x - 4 - 32, this.pos.y - 4, this.width * 8 + 8 + 32, this.height * 9 + 6);
-        R.palset(22);
-        R.rect(this.pos.x - 4 - 32, this.pos.y - 4, this.width * 8 + 8 + 32, this.height * 9 + 6);
 
-        let f = icon;
-        if (icon.length) f = random(icon);
-        R.palset(22, 0);
-        R.spr(icon, this.pos.x - 33, this.pos.y, 2, 2);
+        if (game.goodDialogBoxes) {
+            R.palset(0);
+            R.fillRect(this.pos.x - 4 - 32, this.pos.y - 4, this.width * 8 + 8 + 32, this.height * 9 + 6);
+            R.palset(22);
+            R.rect(this.pos.x - 4 - 32, this.pos.y - 4, this.width * 8 + 8 + 32, this.height * 9 + 6);
+
+            R.palset(22, 0);
+            R.spr(f, this.pos.x - 33, this.pos.y, 2, 2);
+        }
 
         R.put(this.text, this.pos.x, this.pos.y, 22);
 
