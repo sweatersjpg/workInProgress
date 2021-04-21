@@ -7,19 +7,19 @@ let npcs;
 
 function init() {
     main = new Game();
-
-    scenes = {
-        bad: [DevTalkbad1],
-        good: []
-    }
-
-    npcs = {
-        bad: [NPCbad1],
-        good: []
-    }
 }
 
 function Game() {
+    scenes = {
+        bad: [Deleted, DEVbad3, DEVbad2, DEVbad1],
+        good: [GiveUp, DEVgood3, DEVgood2, DEVgood1]
+    }
+
+    npcs = {
+        bad: [NPCdeleted, NPCbad3, NPCbad2, NPCbad1],
+        good: [NPCgiveUp, NPCgood3, NPCgood2, NPCgood1]
+    }
+
     this.goodDialogBoxes = true;
 
     this.walls = [];
@@ -28,13 +28,18 @@ function Game() {
 
     this.player = new Player(this, 200, 120);
 
-    this.currentNPC = false;
+    this.nextNPC = false;
 
     this.dialog = false;
 
-    this.scene = new intro(this);
-    this.nextScene = false;
-    // this.scene.stage = 9;
+    this.scene = new Intro(this);
+    this.nextScene = Intro;
+
+    // test area
+    // blankRoom(this);
+    // new CreditsCat(this, 250, 150);
+    // this.scene = new GiveUp(this);
+    // ---------
 
     this.draw = () => {
 
@@ -50,11 +55,11 @@ function Game() {
 
         for (let a = this.actors.length - 1; a >= 0; a--) this.actors[a].update();
         for (let a = this.actors.length - 1; a >= 0; a--) this.actors[a].draw();
+        for (let a = this.actors.length - 1; a >= 0; a--) this.actors[a].debug();
+
         for (let w = this.walls.length - 1; w >= 0; w--) this.walls[w].draw();
 
         if (this.dialog) this.dialog.draw();
-
-        // if (btn.a && !pbtn.a) this.nextRoom();
 
         if (!this.scene) {
             let g = R.buffer[121];
@@ -67,27 +72,32 @@ function Game() {
 
     }
 
+    this.NPC = false;
     let lastRoom = xRoom;
     this.nextRoom = (noNPC) => {
-        if (this.currentNPC && this.currentNPC.finished) this.scene = new this.nextScene(game);
-
         this.walls = [];
-        this.actors = [this.player]; // reset actors (accept for player)
+        if (!this.NPC) this.actors = [this.player]; // reset actors (except for player)
+        else this.actors = [this.player, this.NPC];
 
-        if (random() < 0.15 && !noNPC) new this.currentNPC(this);
+        if (random() < 0.25 && !noNPC && !this.NPC && this.nextNPC) this.NPC = new this.nextNPC(this);
+
+        if (this.NPC && this.NPC.finished) {
+            this.NPC = false;
+            if (this.nextScene) {
+                this.scene = new this.nextScene(this);
+                return;
+            }
+        }
 
         let dir = this.player.pos.copy().add(-200, -140);
         let angle = round((degrees(dir.heading()) + 180) / 90) * 90;
 
-        let fns = [xRoom, tRoom, iRoom, lRoom];
-        fns.splice(fns.indexOf(lastRoom), 1);
-        lastRoom = random(fns);
+        let rooms = [xRoom, tRoom, iRoom, lRoom];
+        rooms.splice(rooms.indexOf(lastRoom), 1);
+        lastRoom = random(rooms);
         lastRoom(this, radians(angle));
-        // lRoom(this, radians(angle));
 
     }
-    // this.nextRoom();
-    // blankRoom(this);
 
 }
 

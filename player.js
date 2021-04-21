@@ -92,7 +92,7 @@ function Player(game, x, y) {
         if (!this.item) return;
 
         this.item.pos = this.pos.copy();
-        this.item.pos.x += this.size.x - this.item.size.x;
+        this.item.pos.x += floor((this.size.x - this.item.size.x) / 2);
         this.item.h = 26;
 
         this.item.draw(R.lset(getLayer(this.pos.y + this.size.y)));

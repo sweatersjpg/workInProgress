@@ -21,7 +21,7 @@ function Actor(game, x, y, w, h) {
     this.debug = () => {
         if (!DEBUG) return;
 
-        R.lset(121);
+        R.lset(122);
         R.palset(4, 0);
         R.rect(this.pos.x, this.pos.y, this.size.x, this.size.y);
     }

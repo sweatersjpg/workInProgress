@@ -16,13 +16,29 @@ function PauseMenu() {
         "RESUME": () => {
             paused = false;
         },
+        "CHECKPOINT": () => {
+            ohistory.push(options);
+            thistory.push(title);
+            title = "Reset to last checkpoint?";
+            options = {
+                "YES": () => {
+                    main.scene = new main.nextScene(main);
+                    paused = false;
+                },
+                "FUCK GO BACK": () => {
+                    options = ohistory.pop();
+                    title = thistory.pop();
+                }
+            }
+        },
         "RESTART": () => {
             ohistory.push(options);
             thistory.push(title);
             title = "Are you sure?";
             options = {
                 "YES": () => {
-                    main = new Game();
+                    window.location.reload();
+                    // main = new Game();
                     paused = false;
                 },
                 "FUCK GO BACK": () => {
@@ -48,6 +64,8 @@ function PauseMenu() {
             }
         }
     }
+
+    if (!main.nextScene || !main.scene) delete options["CHECKPOINT"];
 
     let selection = 0;
     this.display = () => {

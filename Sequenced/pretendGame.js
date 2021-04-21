@@ -78,6 +78,28 @@ function Ball(game, x, y) {
     }
 }
 
+function Can(game, x, y) {
+    Item.call(this, game, x, y, 15, 8);
+
+    this.hb = 0.80;
+    this.inertia = 0.90;
+
+    let squish = 0;
+    this.draw = (layer) => {
+        if (squish > 0) squish /= 2;
+        if (this.h < 0.1) squish = abs(this.vh);
+        if (abs(this.vh) <= 1) squish = 0;
+
+        R.lset(layer ?? getLayer(this.pos.y + this.size.y));
+
+        R.palset(26, 3);
+        R.spr(112, this.pos.x - squish / 2, this.pos.y - 10 - this.h + squish,
+            1, 1, false, 0, 16 + squish, 16 - squish);
+
+        this.debug();
+    }
+}
+
 function Pot(game, x, y) {
     Item.call(this, game, x, y, 13, 8);
 
@@ -129,6 +151,7 @@ function Button(game, x, y, text, playerOnly) {
     let timer = 0;
     let blink = false;
     this.update = () => {
+        this.justActivated = false;
         let contact = false;
         if (playerOnly) contact = collided(this.pos, this.size, game.player.pos, game.player.size);
         else for (let a of game.actors) {
@@ -149,6 +172,8 @@ function Button(game, x, y, text, playerOnly) {
         if (timer > 1) {
             timer--;
         } if (timer == 1) {
+            timer = 0.5;
+            this.justActivated = true;
             this.activated = contact;
         }
 
