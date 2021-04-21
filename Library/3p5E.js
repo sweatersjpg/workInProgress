@@ -33,8 +33,15 @@ let mouse;
 let testImg;
 
 function setup() {
+    let w = windowWidth;
+    let h = windowWidth * HEIGHT / WIDTH;
 
-    cvs = createCanvas(WIDTH * 3, HEIGHT * 3);
+    if (h > windowHeight) {
+        w = windowHeight * WIDTH / HEIGHT;
+        h = windowHeight;
+    }
+
+    cvs = createCanvas(w, h);
 
     let canvasElement = cvs.elt;
     let ctx = canvasElement.getContext('2d');
@@ -125,4 +132,16 @@ function TwoPlayerInput() {
     this.makeSelfDefault = () => {
         for (const k in this[0]) this[k] = this[0][k];
     }
+}
+
+function windowResized() {
+    let w = windowWidth;
+    let h = windowWidth * HEIGHT / WIDTH;
+
+    if (h > windowHeight) {
+        w = windowHeight * WIDTH / HEIGHT;
+        h = windowHeight;
+    }
+
+    resizeCanvas(w, h);
 }
