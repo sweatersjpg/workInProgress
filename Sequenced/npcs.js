@@ -9,13 +9,16 @@ function NPC(game, x, y, w, h) {
     this.finished = false;
 
     this.update = () => {
+
         if (!game.dialog && collided(game.player.pos, game.player.size, this.dBox.pos, this.dBox.size)) {
             if (!(btn.a && !pbtn.a) || !this.dialog.length) return;
             game.dialog = this.dialog[this.dIndex];
             if (this.dIndex < this.dialog.length - 1) this.dIndex++;
+            else this.finished = true;
         }
 
-        if (this.dIndex == this.dialog.length - 1) this.finished = true;
+        // if (this.dIndex == this.dialog.length - 1) this.finished = true;
+
     }
 }
 

@@ -38,7 +38,7 @@ function Game() {
     // test area
     // blankRoom(this);
     // new CreditsCat(this, 250, 150);
-    // this.scene = new GiveUp(this);
+    // this.scene = new DEVbad2(this);
     // ---------
 
     this.draw = () => {
