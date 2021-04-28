@@ -16,6 +16,7 @@ function Dialog(game, icon, lines) {
     this.waiting = false;
 
     let textSpeed = 0.5;
+    if (dialogSound == keySound) textSpeed = 0.25;
 
     let f = icon;
     if (icon.length) f = random(icon);
@@ -26,7 +27,11 @@ function Dialog(game, icon, lines) {
         if (this.t < this.currentLine.length && nLines < this.height) {
             if (this.t % 1 == 0) {
                 this.text += this.currentLine[floor(this.t)];
-                if (this.currentLine[floor(this.t)] != " " && dialogSound && this.t % 2 == 0) dialogSound.play(0, random(0.8, 1));
+                console.log(this.currentLine[floor(this.t)]);
+                if (!"\n ".includes(this.currentLine[floor(this.t)])) {
+                    if (dialogSound /*&& this.t % 2 == 0*/)
+                        dialogSound.play(0, random(0.8, 1), random(0.5, 1));
+                }
             }
             this.t += textSpeed;
 
