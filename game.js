@@ -11,11 +11,13 @@ let music;
 function preload() {
     soundFormats('wav');
     keySound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/key');
-    music = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/ambient');
+    // music = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/ambient');
 }
 
 function init() {
     main = new Game();
+
+    dialogSound = keySound;
 }
 
 function Game() {
@@ -47,7 +49,7 @@ function Game() {
     // test area
     // blankRoom(this);
     // new CreditsCat(this, 250, 150);
-    // this.scene = new DEVbad2(this);
+    this.scene = new DEVbad2(this);
     // ---------
 
     this.draw = () => {

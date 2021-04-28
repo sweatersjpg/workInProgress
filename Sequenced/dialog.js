@@ -1,3 +1,4 @@
+let dialogSound;
 
 function Dialog(game, icon, lines) {
 
@@ -23,7 +24,10 @@ function Dialog(game, icon, lines) {
         let nLines = (this.text.match(/\n/g) || []).length;
 
         if (this.t < this.currentLine.length && nLines < this.height) {
-            if (this.t % 1 == 0) this.text += this.currentLine[floor(this.t)];
+            if (this.t % 1 == 0) {
+                this.text += this.currentLine[floor(this.t)];
+                if (this.currentLine[floor(this.t)] != " " && dialogSound && this.t % 2 == 0) dialogSound.play(0, random(0.8, 1));
+            }
             this.t += textSpeed;
 
             if (this.t > 1 && btn.a && !pbtn.a) {
