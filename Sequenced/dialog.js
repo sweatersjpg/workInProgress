@@ -16,29 +16,34 @@ function Dialog(game, icon, lines) {
     this.waiting = false;
 
     let textSpeed = 0.5;
-    if (dialogSound == keySound) textSpeed = 0.25;
 
     let f = icon;
     if (icon.length) f = random(icon);
+
+    let pt = -1;
 
     this.draw = () => {
         let nLines = (this.text.match(/\n/g) || []).length;
 
         if (this.t < this.currentLine.length && nLines < this.height) {
-            if (this.t % 1 == 0) {
+            if (floor(this.t) != floor(pt)) {
                 this.text += this.currentLine[floor(this.t)];
-                console.log(this.currentLine[floor(this.t)]);
                 if (!"\n ".includes(this.currentLine[floor(this.t)])) {
                     if (dialogSound /*&& this.t % 2 == 0*/)
-                        dialogSound.play(0, random(0.8, 1), random(0.5, 1));
+                        dialogSound.play(0, random(0.7, 1), random(0.2, 1));
+                } else if (" ".includes(this.currentLine[floor(this.t)]) && dialogSound == keySound) {
+                    dialogSound.play(0, random(0.65, 0.7), random(0.8, 1));
                 }
             }
+            pt = this.t;
             this.t += textSpeed;
+            if (dialogSound == keySound) this.t -= random(0, 0.2);
 
             if (this.t > 1 && btn.a && !pbtn.a) {
                 while (this.t < this.currentLine.length && nLines < this.height) {
                     nLines = (this.text.match(/\n/g) || []).length;
-                    if (this.t % 1 == 0) this.text += this.currentLine[floor(this.t)];
+                    if (floor(this.t) != floor(pt)) this.text += this.currentLine[floor(this.t)];
+                    pt = this.t;
                     this.t += textSpeed;
                 }
             }

@@ -49,7 +49,7 @@ function Game() {
     // test area
     // blankRoom(this);
     // new CreditsCat(this, 250, 150);
-    this.scene = new DEVbad2(this);
+    this.scene = new DEVgood1(this);
     // ---------
 
     this.draw = () => {
