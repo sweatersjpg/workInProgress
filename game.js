@@ -5,6 +5,15 @@ let scenes;
 
 let npcs;
 
+let keySound;
+let music;
+
+function preload() {
+    soundFormats('wav');
+    keySound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/key');
+    music = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/ambient');
+}
+
 function init() {
     main = new Game();
 }
