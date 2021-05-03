@@ -24,6 +24,7 @@ function NPC(game, x, y, w, h) {
 
 function CreepyNPC(game, x, y) {
     NPC.call(this, game, x, y, 16, 8);
+    dialogSound = breathSound;
 
     this.dBox.size.add(30, 30);
     this.dBox.pos.add(-15, -15);
@@ -49,6 +50,7 @@ function CreepyNPC(game, x, y) {
 
 function KindNPC(game, x, y) {
     NPC.call(this, game, x, y, 15, 8);
+    dialogSound = blipSound;
 
     this.dBox.size.add(30, 30);
     this.dBox.pos.add(-15, -15);

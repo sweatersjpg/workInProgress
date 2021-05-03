@@ -6,11 +6,16 @@ let scenes;
 let npcs;
 
 let keySound;
+let blipSound;
+let breathSound;
 let music;
 
 function preload() {
     soundFormats('wav');
     keySound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/key');
+    blipSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/blip');
+    breathSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/breath');
+
     // music = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/ambient');
 }
 
@@ -95,6 +100,7 @@ function Game() {
         if (this.NPC && this.NPC.finished) {
             this.NPC = false;
             if (this.nextScene) {
+                dialogSound = keySound;
                 this.scene = new this.nextScene(this);
                 return;
             }
