@@ -68,7 +68,7 @@ function Game() {
     // test area
     // blankRoom(this);
     // new CreditsCat(this, 250, 150);
-    this.scene = new Deleted(this);
+    // this.scene = new Deleted(this);
     // ---------
 
     this.draw = () => {
