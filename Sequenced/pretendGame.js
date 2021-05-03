@@ -20,6 +20,8 @@ function Item(game, x, y, w, h) {
     this.notSolid = true;
     this.isItem = true;
 
+    this.sound = ballSound;
+
     this.vel = new Vector(random(2, 6), 0).rotate(random(TAU));
 
     this.h = 32;
@@ -36,6 +38,10 @@ function Item(game, x, y, w, h) {
         if (this.h < 0) {
             this.h = 0;
             this.vh *= -this.hb;
+        }
+
+        if (this.h < 0.1 && abs(this.vh) >= 0.5) {
+            this.sound.play(0, random(0.9, 1.1), abs(this.vh) / 4);
         }
     }
 
@@ -102,6 +108,7 @@ function Can(game, x, y) {
 
 function Pot(game, x, y) {
     Item.call(this, game, x, y, 13, 8);
+    this.sound = plantSound;
 
     this.inertia = 0.85;
 
@@ -118,10 +125,6 @@ function Pot(game, x, y) {
         if (squish > 0) squish /= 2;
         if (this.h < 0.1) squish = abs(this.vh);
         if (abs(this.vh) <= 1) squish = 0;
-
-        if (this.h < 0.1 && abs(this.vh) >= 0.5) {
-            plantSound.play(0, random(0.9, 1.1), abs(this.vh) / 4);
-        }
 
         if (growth < 7 && game.player.item == this) growth += 0.01;
         if (growth >= 7) wave = 2 * sin(frameCount / 10);

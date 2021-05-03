@@ -12,7 +12,8 @@ let plantSound;
 let buttonDownSound;
 let buttonUpSound;
 let footstepSound;
-let music;
+let ballSound;
+// let music;
 
 function preload() {
     soundFormats('wav');
@@ -23,7 +24,8 @@ function preload() {
     plantSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/plant');
     buttonDownSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/buttonDown');
     buttonUpSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/buttonUp');
-    footstepSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/footstepReverb');
+    footstepSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/footstep');
+    ballSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/ball');
 
     // music = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/ambient');
 }

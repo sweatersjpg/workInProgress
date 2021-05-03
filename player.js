@@ -86,6 +86,7 @@ function Player(game, x, y) {
     this.pickUp = (item) => {
         item.kill();
         this.item = item;
+        this.item.sound.play(0, random(0.9, 1.1), 1.5);
         this.updateItem();
     }
 
