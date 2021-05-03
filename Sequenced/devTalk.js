@@ -694,6 +694,7 @@ function Deleted(game) {
             if (game.dialog) timer = new Date();
             if (new Date() - timer > 0 && !game.dialog) {
                 window.location.replace("http://sweaters.itch.io/badEnding");
+                noLoop();
             }
         }
     }
