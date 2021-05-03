@@ -13,6 +13,7 @@ let buttonDownSound;
 let buttonUpSound;
 let footstepSound;
 let ballSound;
+let splishSound;
 // let music;
 
 function preload() {
@@ -26,6 +27,8 @@ function preload() {
     buttonUpSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/buttonUp');
     footstepSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/footstep');
     ballSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/ball');
+    splishSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/splish');
+
 
     // music = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/ambient');
 }
@@ -65,7 +68,7 @@ function Game() {
     // test area
     // blankRoom(this);
     // new CreditsCat(this, 250, 150);
-    this.scene = new DEVgood1(this);
+    // this.scene = new DEVgood3(this);
     // ---------
 
     this.draw = () => {

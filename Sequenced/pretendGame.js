@@ -86,9 +86,14 @@ function Ball(game, x, y) {
 
 function Can(game, x, y) {
     Item.call(this, game, x, y, 15, 8);
+    this.sound = splishSound;
 
-    this.hb = 0.80;
-    this.inertia = 0.90;
+    // this.hb = 0.80;
+    this.inertia = 0.85;
+
+    this.drop = () => {
+        this.vel = game.player.vel.copy().mult(4);
+    }
 
     let squish = 0;
     this.draw = (layer) => {
