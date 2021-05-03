@@ -21,6 +21,7 @@ function Player(game, x, y) {
         if (btn.left) this.vel.x -= acc;
     }
 
+    let newStep = true;
     this.draw = () => {
         if (this.vel.x > 1) dir = false;
         else if (this.vel.x < -1) dir = true;
@@ -43,6 +44,13 @@ function Player(game, x, y) {
         } else if (state == "V") {
             frame = frames[floor(frameCount / 4) % frames.length] + 56;
         }
+
+        if ([26, 30, 58, 62].includes(frame)) {
+            if (newStep) {
+                footstepSound.play(0, random(0.6, 0.7), random(0.2, 0.3));
+                newStep = false;
+            }
+        } else newStep = true;
 
         R.lset(getLayer(this.pos.y + this.size.y));
 

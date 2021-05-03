@@ -8,6 +8,10 @@ let npcs;
 let keySound;
 let blipSound;
 let breathSound;
+let plantSound;
+let buttonDownSound;
+let buttonUpSound;
+let footstepSound;
 let music;
 
 function preload() {
@@ -15,6 +19,11 @@ function preload() {
     keySound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/key');
     blipSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/blip');
     breathSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/breath');
+
+    plantSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/plant');
+    buttonDownSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/buttonDown');
+    buttonUpSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/buttonUp');
+    footstepSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/footstepReverb');
 
     // music = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/ambient');
 }

@@ -119,6 +119,10 @@ function Pot(game, x, y) {
         if (this.h < 0.1) squish = abs(this.vh);
         if (abs(this.vh) <= 1) squish = 0;
 
+        if (this.h < 0.1 && abs(this.vh) >= 0.5) {
+            plantSound.play(0, random(0.9, 1.1), abs(this.vh) / 4);
+        }
+
         if (growth < 7 && game.player.item == this) growth += 0.01;
         if (growth >= 7) wave = 2 * sin(frameCount / 10);
 
@@ -148,8 +152,9 @@ function Button(game, x, y, text, playerOnly) {
     this.notSolid = true;
     this.active = false;
 
+    let pressed;
+
     let timer = 0;
-    let blink = false;
     this.update = () => {
         this.justActivated = false;
         let contact = false;
@@ -173,8 +178,17 @@ function Button(game, x, y, text, playerOnly) {
             timer--;
         } if (timer == 1) {
             timer = 0.5;
+            buttonUpSound.play(0, random(0.9, 1.1));
             this.justActivated = true;
             this.activated = contact;
+        }
+
+        if (contact && !pressed) {
+            pressed = true;
+            buttonDownSound.play(0, random(0.9, 1.1));
+        } else if (pressed && !contact) {
+            pressed = false;
+            buttonUpSound.play(0, random(0.9, 1.1));
         }
 
     }
