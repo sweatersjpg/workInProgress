@@ -37,8 +37,8 @@ function PauseMenu() {
             title = "Are you sure?";
             options = {
                 "YES": () => {
-                    window.location.reload();
-                    // main = new Game();
+                    // window.location.reload();
+                    main = new Game();
                     paused = false;
                 },
                 "FUCK GO BACK": () => {

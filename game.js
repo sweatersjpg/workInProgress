@@ -41,6 +41,8 @@ function init() {
 }
 
 function Game() {
+    if (music.isPlaying()) music.stop();
+
     scenes = {
         bad: [Deleted, DEVbad3, DEVbad2, DEVbad1],
         good: [GiveUp, DEVgood3, DEVgood2, DEVgood1]
