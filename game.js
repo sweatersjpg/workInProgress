@@ -14,7 +14,7 @@ let buttonUpSound;
 let footstepSound;
 let ballSound;
 let splishSound;
-// let music;
+let music;
 
 function preload() {
     soundFormats('wav');
@@ -29,8 +29,7 @@ function preload() {
     ballSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/ball');
     splishSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/splish');
 
-
-    // music = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/ambient');
+    music = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/ambient');
 }
 
 function init() {
@@ -64,6 +63,7 @@ function Game() {
 
     this.scene = new Intro(this);
     this.nextScene = Intro;
+    music.loop();
 
     // test area
     // blankRoom(this);
@@ -105,6 +105,7 @@ function Game() {
     this.NPC = false;
     let lastRoom = xRoom;
     this.nextRoom = (noNPC) => {
+        if (music.isPlaying()) music.stop();
         this.walls = [];
         if (!this.NPC) this.actors = [this.player]; // reset actors (except for player)
         else this.actors = [this.player, this.NPC];
@@ -116,6 +117,7 @@ function Game() {
             if (this.nextScene) {
                 dialogSound = keySound;
                 this.scene = new this.nextScene(this);
+                music.loop();
                 return;
             }
         }

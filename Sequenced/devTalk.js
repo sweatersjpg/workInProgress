@@ -21,6 +21,8 @@ function Intro(game) {
                 this.stage++;
                 blankRoom(game); //room is reset
                 secondaryStage = 0;
+                music.stop();
+                music.loop();
             }
 
             let s = "";
@@ -44,6 +46,7 @@ function Intro(game) {
                 this.stage++;
                 timer = new Date();
                 blankRoom(game, true); // room reset, no items
+                music.stop();
             }
 
             let s = "error"
