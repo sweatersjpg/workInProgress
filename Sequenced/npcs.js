@@ -76,6 +76,7 @@ function KindNPC(game, x, y) {
 
 function Cat(game, x, y) {
     NPC.call(this, game, x, y, 15, 8);
+    dialogSound = mewSound;
 
     this.dBox.size.add(30, 30);
     this.dBox.pos.add(-15, -15);

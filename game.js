@@ -14,6 +14,7 @@ let buttonUpSound;
 let footstepSound;
 let ballSound;
 let splishSound;
+let mewSound;
 let music;
 
 function preload() {
@@ -21,6 +22,7 @@ function preload() {
     keySound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/key');
     blipSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/blip');
     breathSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/breath');
+    mewSound = loadSound("https://sweatersjpg.github.io/workInProgress/Assets/Sound/mew")
 
     plantSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/plant');
     buttonDownSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/buttonDown');

@@ -31,7 +31,10 @@ function Dialog(game, icon, lines) {
                 if (!"\n ".includes(this.currentLine[floor(this.t)])) {
                     if (dialogSound /*&& this.t % 2 == 0*/) {
                         if (dialogSound == keySound) dialogSound.play(0, random(0.7, 1), random(0.2, 1));
-                        if (dialogSound == breathSound && this.t % 2 == 0) dialogSound.play(0, random(0.7, 1), random(0.6, 0.8));
+                        if (dialogSound == breathSound && this.t % 2 == 0)
+                            dialogSound.play(0, random(0.7, 1), random(0.6, 0.8));
+                        if (dialogSound == mewSound && this.t % 3 == 0)
+                            dialogSound.play(0, random(0.9, 1.1), random(0.6, 0.8));
                         if (dialogSound == blipSound) dialogSound.play(0, random(0.7, 1), random(0.6, 0.8));
                     }
                 } else if (" ".includes(this.currentLine[floor(this.t)]) && dialogSound == keySound) {
