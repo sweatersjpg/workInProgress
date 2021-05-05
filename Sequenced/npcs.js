@@ -205,7 +205,7 @@ function CreditsCat(game) {
     Cat.call(this, game, 210, 110);
     this.dialog = [];
     this.dialog.push(new Dialog(game, this.i, "This game was created by\n\n      Sam Cameron"));
+    this.dialog.push(new Dialog(game, this.i, "Music\n'Ludum Dare 32 - Track 2' by Abstraction"));
     this.dialog.push(new Dialog(game, this.i, "\nBe sure to find and play all the endings!"));
     this.dialog.push(new Dialog(game, this.i, "\n Thank you for playing!"));
-
 }
