@@ -1,5 +1,6 @@
 
 let DEBUG = false;
+let SOUND = true;
 
 let scenes;
 
@@ -18,6 +19,7 @@ let mewSound;
 let music;
 
 function preload() {
+    // if (!SOUND) return;
     soundFormats('wav');
     keySound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/key');
     blipSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/blip');
@@ -35,9 +37,42 @@ function preload() {
 }
 
 function init() {
-    main = new Game();
+    main = new Title();
+    // main = new Game();
 
     dialogSound = keySound;
+}
+
+function Title() {
+    this.actors = [];
+    this.walls = [];
+    this.player = { item: false };
+    let p = new Pot(this, 200 - 8, 174);
+    p.vel = new Vector();
+    p.makeGrown();
+
+    this.draw = () => {
+        this.actors[0].update();
+        this.actors[0].draw();
+
+        R.palset(22, 0);
+
+        let w = 23 * 8;
+        let h = 9 * 8;
+        let x = 200 - w / 2;
+        let y = 120 - h + 8 * sin(frameCount / 25);
+
+        R.spr([152], x, y, 23, 9, false, 0, w, h);
+
+        let pal = [22, 37, 38, 39, 40, 41, 42, 30, 0];
+        let c = 4.5 + 4.5 * sin(frameCount / 10);
+
+        R.put("PRESS ANY KEY TO ENTER", 200 - 22 * 4, 220, pal[floor(c)]);
+
+        if (keyIsPressed) {
+            main = new Game();
+        }
+    }
 }
 
 function Game() {
@@ -67,7 +102,7 @@ function Game() {
 
     this.scene = new Intro(this);
     this.nextScene = Intro;
-    music.loop();
+    if (SOUND) music.loop();
 
     // test area
     // blankRoom(this);
@@ -121,7 +156,7 @@ function Game() {
             if (this.nextScene) {
                 dialogSound = keySound;
                 this.scene = new this.nextScene(this);
-                music.loop();
+                if (SOUND) music.loop();
                 return;
             }
         }

@@ -25,7 +25,7 @@ function PauseMenu() {
                     main.scene = new main.nextScene(main);
                     paused = false;
                 },
-                "FUCK GO BACK": () => {
+                "F*CK GO BACK": () => {
                     options = ohistory.pop();
                     title = thistory.pop();
                 }
@@ -41,7 +41,25 @@ function PauseMenu() {
                     main = new Game();
                     paused = false;
                 },
-                "FUCK GO BACK": () => {
+                "F*CK GO BACK": () => {
+                    options = ohistory.pop();
+                    title = thistory.pop();
+                }
+            }
+        },
+        "SOUND": () => {
+            ohistory.push(options);
+            thistory.push(title);
+            title = "";
+            options = {
+                "SOUND ON": () => {
+                    SOUND = true;
+                    options = ohistory.pop();
+                    title = thistory.pop();
+                },
+                "SOUND OFF": () => {
+                    if (music.isPlaying()) music.stop();
+                    SOUND = false;
                     options = ohistory.pop();
                     title = thistory.pop();
                 }

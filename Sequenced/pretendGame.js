@@ -41,7 +41,7 @@ function Item(game, x, y, w, h) {
         }
 
         if (this.h < 0.1 && abs(this.vh) >= 0.5) {
-            this.sound.play(0, random(0.9, 1.1), abs(this.vh) / 4);
+            if (SOUND) this.sound.play(0, random(0.9, 1.1), abs(this.vh) / 4);
         }
     }
 
@@ -148,6 +148,10 @@ function Pot(game, x, y) {
         this.debug();
     }
 
+    this.makeGrown = () => {
+        growth = 7;
+    }
+
     this.isGrown = () => {
         return growth >= 7;
     }
@@ -186,17 +190,17 @@ function Button(game, x, y, text, playerOnly) {
             timer--;
         } if (timer == 1) {
             timer = 0.5;
-            buttonUpSound.play(0, random(0.9, 1.1));
+            if (SOUND) buttonUpSound.play(0, random(0.9, 1.1));
             this.justActivated = true;
             this.activated = contact;
         }
 
         if (contact && !pressed) {
             pressed = true;
-            buttonDownSound.play(0, random(0.9, 1.1));
+            if (SOUND) buttonDownSound.play(0, random(0.9, 1.1));
         } else if (pressed && !contact) {
             pressed = false;
-            buttonUpSound.play(0, random(0.9, 1.1));
+            if (SOUND) buttonUpSound.play(0, random(0.9, 1.1));
         }
 
     }

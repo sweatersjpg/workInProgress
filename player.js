@@ -47,7 +47,7 @@ function Player(game, x, y) {
 
         if ([26, 30, 58, 62].includes(frame)) {
             if (newStep) {
-                footstepSound.play(0, random(0.6, 0.7), random(0.2, 0.3));
+                if (SOUND) footstepSound.play(0, random(0.6, 0.7), random(0.2, 0.3));
                 newStep = false;
             }
         } else newStep = true;
@@ -86,7 +86,7 @@ function Player(game, x, y) {
     this.pickUp = (item) => {
         item.kill();
         this.item = item;
-        this.item.sound.play(0, random(0.9, 1.1), 1.5);
+        if (SOUND) this.item.sound.play(0, random(0.9, 1.1), 1.5);
         this.updateItem();
     }
 
