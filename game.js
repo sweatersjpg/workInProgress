@@ -21,19 +21,21 @@ let music;
 function preload() {
     // if (!SOUND) return;
     soundFormats('wav');
-    keySound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/key');
-    blipSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/blip');
-    breathSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/breath');
-    mewSound = loadSound("https://sweatersjpg.github.io/workInProgress/Assets/Sound/mew")
+    let sf = ".wav";
 
-    plantSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/plant');
-    buttonDownSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/buttonDown');
-    buttonUpSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/buttonUp');
-    footstepSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/footstep');
-    ballSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/ball');
-    splishSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/splish');
+    keySound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/key' + sf);
+    blipSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/blip' + sf);
+    breathSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/breath' + sf);
+    mewSound = loadSound("https://sweatersjpg.github.io/workInProgress/Assets/Sound/mew" + sf)
 
-    music = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/ambient');
+    plantSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/plant' + sf);
+    buttonDownSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/buttonDown' + sf);
+    buttonUpSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/buttonUp' + sf);
+    footstepSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/footstep' + sf);
+    ballSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/ball' + sf);
+    splishSound = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/splish' + sf);
+
+    music = loadSound('https://sweatersjpg.github.io/workInProgress/Assets/Sound/ambient' + sf);
 }
 
 function init() {
